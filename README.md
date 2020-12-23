@@ -1,4 +1,3 @@
-
 # datalake-case
 
 <!-- vscode-markdown-toc -->
@@ -69,10 +68,11 @@ Summarizing the goals of each service, table below also points to respective doc
 ## <a name='Runningthissolution'></a>Running this solution
 
 ### <a name='Quickin-videowalkthrough'></a>Quick in-video walkthrough 
+<div align="center">
+<a href="https://youtu.be/Vk6tzIwJUW0 "> <img style="border: 1px solid #ddd" width="60%" src="https://raw.githubusercontent.com/matheusmota/datalake-case/main/resources/images/snap.gif"/> </a>
 
-<a href=""> <img width="60%" src="https://miro.medium.com/max/2214/1*fQFV3iUK8C8G_4eULCeuLg.gif"/> </a>
-
-**Video URL:** https://youtu.be/-7777777777
+**Video URL:** https://youtu.be/Vk6tzIwJUW0 
+</div>
 
 
 ### <a name='Runninglocally'></a>Running locally
