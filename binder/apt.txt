@@ -1,0 +1,14 @@
+# system helpers
+htop
+vim
+curl
+wget
+net-tools
+
+#hadoop/spark related
+ssh
+pdsh
+rsync
+openjdk-8-jdk
+telnet
+scala

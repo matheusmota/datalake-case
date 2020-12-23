@@ -1,0 +1,159 @@
+#!/bin/bash
+
+###############################################################
+#          jupyter/jupyterlab extensions/kernels              #
+###############################################################
+
+# Beakerx installation 
+# echo "Beakerx install"
+# beakerx install
+# echo "Beakerx extensions install"
+# jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build 
+# jupyter labextension install beakerx-jupyterlab --no-build 
+
+
+# Table of contents Jupyter Lab Extension
+echo "Table of contents Jupyter Lab extension install"
+jupyter labextension install @jupyterlab/toc --no-build 
+
+# Jupyter/Jupyterlab extension for proxying internal applications
+# echo "Jupyter/Jupyterlab proxy extension install"
+# jupyter serverextension enable --py jupyter_server_proxy
+# jupyter labextension install jupyterlab-server-proxy
+
+
+# Building everything up
+echo "Building everything up (jupyter lab build)"
+jupyter lab build 
+
+
+###############################################################
+#             moving to a local installation folder           #
+###############################################################
+
+mkdir ~/resources/local
+cd    ~/resources/local
+
+###############################################################
+#             hadoop installation commands                    #
+###############################################################
+
+export HADOOP_VERSION=2.9.2
+echo "export HADOOP_VERSION=${HADOOP_VERSION}" >> ~/.bashrc
+echo "export HADOOP_VERSION=${HADOOP_VERSION}" >> ~/.profile
+
+export HADOOP_HOME=$(pwd)/hadoop-${HADOOP_VERSION}
+echo "export HADOOP_HOME=${HADOOP_HOME}"       >> ~/.bashrc
+echo "export HADOOP_HOME=${HADOOP_HOME}"       >> ~/.profile
+
+
+wget http://ftp.unicamp.br/pub/apache/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz -q  
+tar -xvf hadoop-${HADOOP_VERSION}.tar.gz >> /dev/null                                                            
+rm       hadoop-${HADOOP_VERSION}.tar.gz              
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 " >> ~/.bashrc
+echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 " >> ~/.profile
+echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 " >> ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh
+
+# adding bin and sbin to $path
+echo "export PATH=\$PATH:\$HADOOP_HOME/bin"  >> ~/.bashrc
+echo "export PATH=\$PATH:\$HADOOP_HOME/bin"  >> ~/.profile
+echo "export PATH=\$PATH:\$HADOOP_HOME/sbin" >> ~/.bashrc
+echo "export PATH=\$PATH:\$HADOOP_HOME/sbin" >> ~/.profile
+
+#adding HADOOP_CONF_DIR to spark use YARN
+export HADOOP_CONF_DIR=${HADOOP_HOME}/etc/hadoop
+echo "export HADOOP_CONF_DIR=${HADOOP_CONF_DIR}"       >> ~/.bashrc
+echo "export HADOOP_CONF_DIR=${HADOOP_CONF_DIR}"       >> ~/.profile
+
+# creating ssh-related folders
+mkdir ~/.ssh/etc/ssh -p
+
+# setup passphraseless ssh (forcing the adding to know hosts)
+ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa  &&   cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && chmod 0600 ~/.ssh/authorized_keys 
+
+# generating keys for sshd server
+ssh-keygen -A -f ~/.ssh 
+chmod 600 ~/.ssh/etc/ssh/* -R
+
+# hadoop 3.*.*
+export PDSH_RCMD_TYPE=ssh
+echo "export PDSH_RCMD_TYPE=ssh" >> ~/.bashrc
+echo "export PDSH_RCMD_TYPE=ssh" >> ~/.profile
+
+# Adding ssh options to Hadoop via envvar
+# connecting in a diferent port (-p 8822)
+# avoiding host key checking (-o StrictHostKeyChecking=no)
+export HADOOP_SSH_OPTS="-o StrictHostKeyChecking=no -p 8822"
+echo "export HADOOP_SSH_OPTS=\"-o StrictHostKeyChecking=no -p 8822\"" >> ~/.bashrc
+echo "export HADOOP_SSH_OPTS=\"-o StrictHostKeyChecking=no -p 8822\"" >> ~/.profile
+
+
+
+###############################################################
+#            spark installation commands                      #
+###############################################################
+export SPARK_VERSION=2.4.6
+echo "export SPARK_VERSION=${SPARK_VERSION}" >> ~/.bashrc
+echo "export SPARK_VERSION=${SPARK_VERSION}" >> ~/.profile
+
+export SPARK_HOME=$(pwd)/spark-${SPARK_VERSION}
+echo "export SPARK_HOME=${SPARK_HOME}" >> ~/.bashrc
+echo "export SPARK_HOME=${SPARK_HOME}" >> ~/.profile
+
+wget http://ftp.unicamp.br/pub/apache/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-without-hadoop.tgz  -q     
+
+tar -xvf spark-${SPARK_VERSION}-bin-without-hadoop.tgz > /dev/null 										 		              
+rm       spark-${SPARK_VERSION}-bin-without-hadoop.tgz															            
+mv 		 spark-${SPARK_VERSION}-bin-without-hadoop	spark-${SPARK_VERSION}
+
+# adding bin/ to $path
+echo "export PATH=\$PATH:\$SPARK_HOME/bin"   >> ~/.bashrc
+echo "export PATH=\$PATH:\$SPARK_HOME/bin"   >> ~/.profile
+
+# Adding ssh options to Spark via envvar
+# connecting in a diferent port (-p 8822)
+# avoiding host key checking (-o StrictHostKeyChecking=no)
+export SPARK_SSH_OPTS="-o StrictHostKeyChecking=no -p 8822"
+echo "export SPARK_SSH_OPTS=\"-o StrictHostKeyChecking=no -p 8822\"" >> ~/.bashrc
+echo "export SPARK_SSH_OPTS=\"-o StrictHostKeyChecking=no -p 8822\"" >> ~/.profile
+
+# Pointing Spark to the hadoop classpath (https://spark.apache.org/docs/latest/hadoop-provided.html)
+export SPARK_DIST_CLASSPATH=$($HADOOP_HOME/bin/hadoop classpath)
+echo "export SPARK_DIST_CLASSPATH=$($HADOOP_HOME/bin/hadoop classpath)" >> ~/.bashrc
+echo "export SPARK_DIST_CLASSPATH=$($HADOOP_HOME/bin/hadoop classpath)" >> ~/.profile
+
+# Pointing Spark to the hadoop YARNfolder
+export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
+echo "export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop" >> ~/.bashrc
+echo "export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop" >> ~/.profile
+
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+echo "export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop" >> ~/.bashrc
+echo "export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop" >> ~/.profile
+
+###############################################################
+#             vscode installation commands                    #
+###############################################################
+
+
+export CODE_SERVER_VERSION=3.4.1
+echo "export CODE_SERVER_VERSION=${CODE_SERVER_VERSION}" >> ~/.bashrc
+echo "export CODE_SERVER_VERSION=${CODE_SERVER_VERSION}" >> ~/.profile
+
+export CODE_SERVER_HOME=$(pwd)/code-server-${CODE_SERVER_VERSION}
+echo "export CODE_SERVER_HOME=${CODE_SERVER_HOME}"       >> ~/.bashrc
+echo "export CODE_SERVER_HOME=${CODE_SERVER_HOME}"       >> ~/.profile
+
+
+# Download and install VS Code server
+wget -q -O code-server.tar.gz https://github.com/cdr/code-server/releases/download/$CODE_SERVER_VERSION/code-server-$CODE_SERVER_VERSION-linux-x86_64.tar.gz                            
+tar xzf code-server.tar.gz
+mv code-server-${CODE_SERVER_VERSION}-linux-x86_64 code-server-$CODE_SERVER_VERSION
+rm -rf code-server.tar.gz
+
+# adding bin/ to $path
+echo "export PATH=\$PATH:\$CODE_SERVER_HOME/bin"   >> ~/.bashrc
+echo "export PATH=\$PATH:\$CODE_SERVER_HOME/bin"   >> ~/.profile
+
