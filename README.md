@@ -108,7 +108,7 @@ check-services exited with code 0
 
 
 
-## <a name='Whatisunfortunatelymissingduetotimeconstraints'></a>What is (unfortunately) missing due to time constraints
+## <a name='Whatisunfortunatelymissingduetotimeconstraints'></a>What is missing
 
 The time available to finish this solution was limited (unfortunately). Therefore, further improvements in the whole data lake architecture were left as future steps -- most important ones are listed below.
 
