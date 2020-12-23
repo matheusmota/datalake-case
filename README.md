@@ -42,7 +42,7 @@ As shown, the solution covers aspects of automated layer building (Apache NiFi),
 
 
 <div align="center">
-<a href=""> <img style="border: 1px solid #ddd" width="90%" src="https://raw.githubusercontent.com/matheusmota/idatalake-case/main/resources/images/arch.png?token=ABK4MWVL73KMWTMFIUDZQEK74LIUK"/> </a>
+<a href=""> <img style="border: 1px solid #ddd" width="90%" src="https://raw.githubusercontent.com/matheusmota/datalake-case/main/resources/images/arch.png"/> </a>
 </div>
 
 <br/>
