@@ -128,4 +128,4 @@ The time available to finish this solution was limited (unfortunately). Therefor
 
 <a name='ref1'>[[1]]()</a> Kleppmann, Martin. "Designing data-intensive applications." (2015).
 
-<a name='ref2'>[[2]]()</a> Gorelik, Alex. The enterprise big data lake: Delivering the promise of big data and data science. (2019).
+<a name='ref2'>[[2]]()</a> Gorelik, Alex. "The enterprise big data lake: Delivering the promise of big data and data science." (2019).
