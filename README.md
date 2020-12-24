@@ -23,7 +23,7 @@ The solution presented here is a POC covering aspects of infrastructure, topics 
 
 
 Although the solution may meet the coding requirements of the case, it is extremely important to highlight that it is not the main challenge behind properly deploying a data lake. Counterintuitively, the main challenge regarding data lakes pervades aspects of *Automation*, *Cataloging*, *Serving*, and *Governance* [[1]](#ref1) [[2]](#ref2).
-Alternatives for each building block of this data lake solution are proposed in [this supporting presentation](https://docs.google.com/presentation/d/1dqd5nFVog9A7GKW1vDiE47-fo9FQKOgSf7xj9l65wBY/edit#slide=id.ga303b7c7f7_0_5) (slide 3). 
+Alternatives for each building block of this data lake solution are proposed in [this supporting presentation](https://docs.google.com/presentation/d/1dqd5nFVog9A7GKW1vDiE47-fo9FQKOgSf7xj9l65wBY/present#slide=id.ga303b7c7f7_0_5) (slide 3). 
 
 
 Current implementation was designed to be executed on-premises on a single host via Docker due to easier reproducibility sakes. The architectural design/decision process, however, heavily focuses on scaling.
@@ -126,6 +126,6 @@ The time available to finish this solution was limited (unfortunately). Therefor
 
 ## <a name='References'></a>References
 
-<a name='ref1'>[[1]]()</a> Kleppmann, Martin. "Designing data-intensive applications." (2015).
+<a name='ref1'>[1]</a> Kleppmann, Martin. "Designing data-intensive applications" (2015).
 
-<a name='ref2'>[[2]]()</a> Gorelik, Alex. "The enterprise big data lake: Delivering the promise of big data and data science." (2019).
+<a name='ref2'>[2]</a> Gorelik, Alex. "The enterprise big data lake: Delivering the promise of big data and data science" (2019).
