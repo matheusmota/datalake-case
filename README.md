@@ -114,9 +114,9 @@ The time available to finish this solution was limited (unfortunately). Therefor
 
 #### <a name='InfrastructureandTools'></a>Infrastructure and Tools
 1. **Apache Atlas** - As previously mentioned, governance is one of the key challenges surrounding data lakes. Atlas is a governance service that could be used to meet compliance and policies. Furthermore, Atlas provides support to data lineage/provenance. Atlas was considered here as an on-premises alternative to GCP Data Catalog and AWS Glue.
-2. **Messaging System** - It is considered critical to monitor and share messages in any kind of open bus. NiFi has plenty of integration processors for Kafka publishing and consuming operational messages regarding steps of the pipe would be a plus. It could be used not only by business-tailored consumer services, but also by key aspects of the data lake, like Apache Atlas for catalog (re)indexation.
-3. **Container Orchestration** - Since it was decided to adopt on-premises services, a solution using an orchestrator like Kubernets would allow easier scaling. 
-4. **Apache Ranger** - No security-related initiatives are covered in this solution. Apache Ranger could be used for monitoring and managing data access/security across the lake. Since the scenario has sensitive information, it would be important to implement access policies.
+2. **Messaging System** - Production data lakes often involve maintaining a myriad of tools/services. Therefore, providing an unified view of such complex organism is critical. Publishing and consuming messages in a shared, distributed bus is a very powerful way of providing such unified view. For instance, Apache NiFi has plenty of integration processors for Kafka messages exchanging. Such processors could be used for monitoring steps of the pipe and further key business-tailored integration -- e.g., Apache Atlas catalog (re)indexation triggering.
+3. **Container Orchestration** - Since it was decided to adopt on-premises services, using an orchestrator like Kubernets would allow easier scaling. 
+4. **Apache Ranger** - No security-related initiatives are covered in this solution. Apache Ranger could be used for monitoring and managing data access/security across the lake. Since the scenario has sensitive information, it would be important to implement access policies in higher granularity levels (i.e., columns level).
 
 #### <a name='Implementationfeatures'></a>Feature implementation
 1. Use/implement more robust anonymization models instead of only SHA approaches (even using prefixes and suffixes).
@@ -126,6 +126,6 @@ The time available to finish this solution was limited (unfortunately). Therefor
 
 ## <a name='References'></a>References
 
-<a name='ref1'>[1]</a> Kleppmann, Martin. "Designing data-intensive applications" (2015).
+<a name='ref1'>[[1]](https://www.goodreads.com/book/show/23463279)</a> Kleppmann, Martin. "Designing data-intensive applications" (2015).
 
-<a name='ref2'>[2]</a> Gorelik, Alex. "The enterprise big data lake: Delivering the promise of big data and data science" (2019).
+<a name='ref2'>[[2]](https://www.goodreads.com/book/show/27560182)</a> Gorelik, Alex. "The enterprise big data lake: Delivering the promise of big data and data science" (2019).
